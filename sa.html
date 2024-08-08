@@ -1,0 +1,855 @@
+<style>
+    .zrg-primary-color {
+		color: #ffde01;
+	}
+
+	.bmi-calc .elementor-widget-wrap.elementor-element-populated {
+		padding: 0;
+	}
+
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+	
+	}
+
+	.row>* {
+		flex-shrink: 0;
+		width: 100%;
+		max-width: 100%;
+
+	}
+
+	@media (min-width: 992px) {
+		.col-lg-7 {
+			flex: 0 0 auto;
+			width: 58.33333333%;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.col-md-4 {
+			flex: 0 0 auto;
+			width: 33.33333333%;
+		}
+	}
+
+	@media (min-width: 992px) {
+		.col-lg-5 {
+			flex: 0 0 auto;
+			width: 41.66666667%;
+		}
+	}
+
+	.align-items-end {
+		align-items: flex-end !important;
+	}
+
+	.justify-content-center {
+		justify-content: center !important;
+	}
+
+	.position-relative {
+		position: relative !important;
+	}
+
+	.d-flex {
+		display: flex !important;
+	}
+
+	.zrg-margin-bottom {
+		margin-bottom: 40px !important;
+	}
+
+	.zrg-display-2 {
+		font: italic 700 50px / 54px "Anybody", sans-serif;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		text-transform: uppercase;
+		color: #fff;
+	}
+
+	.bmi {
+		background: #0e1721 url(https://zerogym.balcomsoft.com/wp-content/uploads/2022/09/dots_db-1.png?id=1765) !important;
+		background-position: top center !important;
+		background-repeat: no-repeat !important;
+		position: relative;
+		box-sizing: border-box;
+		padding: 130px 75px;
+	}
+
+	.zrg-heading-4 {
+		font: 700 20px / 30px Anybody, sans-serif;
+		margin-top: 0px;
+		text-transform: none;
+	}
+
+	.zrg-button {
+		background: #ffde01;
+		font-family: Poppins, sans-serif;
+		font-size: 18px;
+		font-weight: 500;
+		color: #0E1722;
+		line-height: 28px;
+		text-align: center;
+		border-radius: 105px 105px 105px 105px;
+		border: 0;
+		padding: 15px 35px 15px 35px;
+		text-decoration: none;
+		transition: 0.2s;
+	}
+
+	/* BMI calc */
+	.zrgcore-bmi {
+		color: #ffffff;
+		position: relative;
+		padding: 68px 23px 68px 52px;
+		max-width: 950px;
+		margin: 0 auto;
+	}
+
+	.zrgcore-bmi:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		background: #121d2c;
+		opacity: 0.8;
+		-webkit-box-shadow: 0px 4px 10px rgb(0 0 0 / 35%);
+		box-shadow: 0px 4px 10px rgb(0 0 0 / 35%);
+	}
+
+	.bmi-header {
+		position: relative;
+	}
+
+	.zrgcore-bmi .zrgcore-units-list {
+		position: relative;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 28px;
+		letter-spacing: -0.01em;
+		text-transform: uppercase;
+		margin-bottom: 64px;
+		padding-left: 0;
+		list-style: none;
+	}
+
+	.zrgcore-bmi .zrgcore-units {
+		position: relative;
+		-webkit-transition: .3s all;
+		-o-transition: .3s all;
+		transition: .3s all;
+		cursor: pointer;
+		opacity: 0.4;
+	}
+
+	.zrgcore-bmi .zrgcore-units.active {
+		opacity: 1;
+	}
+
+	.zrgcore-bmi .zrgcore-units:not(:last-child) {
+		margin-right: 56px;
+	}
+
+	.zrgcore-bmi .zrgcore-metric {
+		width: 100%;
+	}
+
+	.zrgcore-bmi .zrgcore-metric input {
+		background-color: transparent;
+		border: 1px solid #FFFFFF;
+		border-radius: 90px;
+		padding: 16px 0 16px 30px;
+		color: #ffffff;
+		width: 100%;
+		-webkit-transition: .3s all;
+		-o-transition: .3s all;
+		transition: .3s all;
+	}
+
+	.zrgcore-bmi .zrgcore-metric input::-webkit-input-placeholder {
+		color: #ffffff;
+		opacity: 0.4;
+	}
+
+	.zrgcore-bmi .zrgcore-metric input::-moz-placeholder {
+		color: #ffffff;
+		opacity: 0.4;
+	}
+
+	.zrgcore-bmi .zrgcore-metric input:-ms-input-placeholder {
+		color: #ffffff;
+		opacity: 0.4;
+	}
+
+	.zrgcore-bmi .zrgcore-metric input::-ms-input-placeholder {
+		color: #ffffff;
+		opacity: 0.4;
+	}
+
+	.zrgcore-bmi .zrgcore-metric input::placeholder {
+		color: #ffffff;
+		opacity: 0.4;
+	}
+
+	.zrgcore-bmi .zrgcore-metric input:focus {
+		outline: none;
+		background: #0e1722;
+		border-color: #ffde01;
+	}
+
+	.zrgcore-bmi .zrgcore-metric>span {
+		display: inline-block;
+		margin-bottom: 12px;
+	}
+
+	.zrgcore-bmi .zrgcore-metric-error {
+		visibility: hidden;
+		position: absolute;
+		bottom: -35px;
+		color: red;
+	}
+
+	.zrgcore-bmi .zrgcore-metric-error.active {
+		visibility: visible;
+	}
+
+	.zrgcore-bmi .zrgcore-gender {
+		margin-top: 53px;
+		margin-bottom: 44px;
+	}
+
+	.zrgcore-bmi .zrgcore-gender h4 {
+		color: #ffde01;
+	}
+
+	.zrgcore-bmi .zrgcore-bmi-result-unit {
+		position: relative;
+	}
+
+	.zrgcore-bmi .zrgcore-bmi-result-unit:after {
+		content: "2";
+		position: absolute;
+		top: -15px;
+		right: -5px;
+		font-size: 15px;
+	}
+
+	.zrgcore-bmi .zrgcore-bmi-status {
+		color: #ffde01;
+	}
+
+	.zrgcore-bmi .zrgcore-gender label {
+		margin-left: 26px;
+		cursor: pointer;
+	}
+
+	.zrgcore-bmi .zrgcore-gender label span {
+		margin-left: 8px;
+	}
+
+	.zrgcore-bmi .zrgcore-bmi-btn:not(.reset-wrapper) {
+		padding: 16px 40px;
+	}
+
+	.zrgcore-bmi .zrgcore-bmi-btn:not(.reset-wrapper):after {
+		z-index: 1;
+	}
+
+	.zrgcore-bmi .zrgcore-bmi-btn.reset-wrapper {
+		position: relative;
+		background-color: transparent;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		border: none;
+		color: #ffffff;
+		-webkit-text-decoration: dashed;
+		text-decoration: dashed;
+		border-bottom: 1px dashed #ffffff;
+		margin-left: 50px;
+		padding: 0;
+	}
+
+	.zrgcore-bmi .zrgcore-stats-content {
+		position: relative;
+		z-index: 3;
+	}
+
+	.zrgcore-bmi .zrgcore-stats-progress {
+		top: -64px;
+		left: 30px;
+		z-index: -1;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+	}
+
+	.zrgcore-bmi .zrgcore-stats li {
+		list-style: disc;
+	}
+
+	.zrgcore-bmi .zrgcore-stats h3 span {
+		color: #ffde01;
+	}
+
+	.zrgcore-bmi .zrgcore-stats p {
+		margin-bottom: 50px;
+	}
+
+	.zrgcore-bmi .zrgcore-stats .zrgcore-content {
+		position: relative;
+		z-index: 4;
+		left: -50px;
+	}
+
+	.zrgcore-bmi .zrgcore-stats .zrgcore-content li {
+		line-height: 34px;
+		white-space: nowrap;
+	}
+
+	.progress-wrapper {
+		position: relative;
+		width: 100%;
+		height: 391px;
+	}
+
+	.progress-ring {
+		position: absolute;
+		width: 386px;
+		height: 386px;
+		stroke-linecap: round;
+		stroke-dasharray: 570;
+		stroke-dashoffset: 570;
+		stroke: #ffffff;
+		-webkit-transition: .3s all;
+		-o-transition: .3s all;
+		transition: .3s all;
+	}
+
+	.progress-ring:first-child {
+		stroke: #ffde01;
+		stroke-dasharray: 1212;
+		stroke-dashoffset: 1300;
+		z-index: 2;
+		-webkit-transform: scaleX(-1);
+		-ms-transform: scaleX(-1);
+		transform: scaleX(-1);
+	}
+
+	.progress-ring:last-child {
+		opacity: 0.1;
+	}
+
+	/* ==========  ==========*/
+	.zrgcore-bmi input[type="radio"] {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background-color: #ffffff;
+		margin: 0;
+		font: inherit;
+		color: currentColor;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		-webkit-transform: translateY(-0.075em);
+		-ms-transform: translateY(-0.075em);
+		transform: translateY(-0.075em);
+	}
+
+	.zrgcore-bmi input[type="radio"]:hover {
+		background-color: #ffde01;
+	}
+
+	.zrgcore-bmi input[type="radio"]:checked {
+		background-color: #ffde01;
+	}
+
+	.zrgcore-bmi input[type="radio"] {
+		display: -ms-grid;
+		display: grid;
+		place-content: center;
+	}
+
+	.zrgcore-bmi input[type="radio"]::before {
+		position: absolute;
+		top: calc(50% - 5px);
+		left: calc(50% - 5px);
+		content: "";
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		-webkit-transform: scale(0);
+		-ms-transform: scale(0);
+		transform: scale(0);
+		background-color: #04070B;
+		-webkit-transition: 120ms -webkit-transform ease-in-out;
+		transition: 120ms -webkit-transform ease-in-out;
+		-o-transition: 120ms transform ease-in-out;
+		transition: 120ms transform ease-in-out;
+		transition: 120ms transform ease-in-out, 120ms -webkit-transform ease-in-out;
+	}
+
+	.zrgcore-bmi input[type="radio"]:checked::before {
+		-webkit-transform: scale(1);
+		-ms-transform: scale(1);
+		transform: scale(1);
+	}
+
+	.zrgcore-bmi input[type=number]::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+	}
+
+	.zrgcore-bmi .zrgcore-nav-indicator {
+		position: absolute;
+		bottom: -10px;
+		-webkit-transition: .4s;
+		-o-transition: .4s;
+		transition: .4s;
+		height: 3px;
+		z-index: 1;
+		left: 0;
+	}
+
+	.zrgcore-bmi circle {
+		cx: 193;
+		cy: 193;
+		r: 180;
+	}
+
+	/* Statuses */
+	.progress-ring.ex-obese {
+		stroke-dasharray: 980;
+	}
+
+	.progress-ring.obese {
+		stroke-dasharray: 1030;
+	}
+
+	.progress-ring.overweight {
+		stroke-dasharray: 1080;
+	}
+
+	.progress-ring.healthy {
+		stroke-dasharray: 1130;
+	}
+
+	.progress-ring.underweight {
+		stroke-dasharray: 1180;
+	}
+
+	/* Round */
+	/* MEDIA */
+	@media only screen and (max-width: 1196px) {
+		.zrgcore-bmi circle {
+			r: 150;
+		}
+
+		.progress-ring {
+			stroke-dasharray: 500;
+			stroke-dashoffset: 528;
+		}
+
+		.progress-ring:first-child {
+			stroke-dasharray: 1120;
+			stroke-dashoffset: 1300;
+		}
+
+		/* Statuses */
+		.progress-ring.ex-obese {
+			stroke-dasharray: 960;
+		}
+
+		.progress-ring.obese {
+			stroke-dasharray: 990;
+		}
+
+		.progress-ring.overweight {
+			stroke-dasharray: 1020;
+		}
+
+		.progress-ring.healthy {
+			stroke-dasharray: 1050;
+		}
+
+		.progress-ring.underweight {
+			stroke-dasharray: 1080;
+		}
+	}
+
+	@media only screen and (max-width: 992px) {
+		.zrgcore-bmi {
+			padding: 50px;
+		}
+
+		.zrgcore-bmi .zrgcore-stats-progress {
+			margin-top: 150px;
+		}
+
+		.zrgcore-bmi .zrgcore-stats .zrgcore-content {
+			left: initial;
+		}
+	}
+
+	@media only screen and (max-width: 768px) {
+		.zrgcore-bmi .zrgcore-metric {
+			width: 100%;
+			margin-bottom: 30px;
+		}
+
+		.zrgcore-bmi .zrgcore-gender {
+			margin-top: 20px;
+		}
+
+		.zrgcore-bmi .zrgcore-metric-error {
+			bottom: -10px;
+		}
+
+		.zrgcore-bmi .zrgcore-stats .zrgcore-content li {
+			white-space: initial;
+		}
+	}
+
+	@media only screen and (max-width: 576px) {
+		.zrgcore-bmi {
+			padding: 15px 10px;
+		}
+
+		.bmi {
+			padding: 50px 20px;
+		}
+	}
+</style>
+<div class="container">
+    <div class="wpb_wrapper">
+        <h2 style="text-align: center" class="vc_custom_heading zrg-margin-bottom zrg-display-2"><span
+                class="zrg-primary-color">BMI</span> CALCULATOR</h2>
+        <div class="">
+            <div class="section">
+                <div class="zrgcore-bmi">
+                    <div class="bmi-header">
+                        <ul class="zrgcore-units-list">
+                            <li class="zrgcore-units active" data-color="#BCFE2F" data-value="metric">Metric Units</li>
+                            <li class="zrgcore-units" data-color="#BCFE2F" data-value="us">US Units</li>
+                            <li><span class="zrgcore-nav-indicator"
+                                    style="width: 78px; left: 175px; background-color: #ffde01;"></span></li>
+                        </ul>
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="fluid">
+                                    <form action="#">
+                                        <div class="row position-relative">
+                                            <div class="col-md-4">
+                                                <label class="zrgcore-metric">
+                                                    <span class="zrg-heading-4">Alter (Jahre)</span>
+                                                    <input type="number" min="2" max="100" value="25" id="zrgcore-metric-age-input"
+                                                        placeholder="Ages: 2-100" class="zrg-text-2">
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="zrgcore-metric">
+                                                    <span class="zrg-heading-4">Größe (<span class="zrgcore-metric-height">ft.</span>)</span>
+                                                    <input type="number" min="1" value="180" max="500" placeholder="ft."
+                                                        id="zrgcore-metric-height-input" class="zrg-text-2">
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="zrgcore-metric">
+                                                    <span class="zrg-heading-4">Gewicht  (<span class="zrgcore-metric-weight">lbs</span>)</span>
+                                                    <input type="number" value="70" min="1" max="500" placeholder="lbs"
+                                                        id="zrgcore-metric-weight-input" class="zrg-text-2 ">
+                                                </label>
+                                            </div>
+                                            <div class="zrgcore-metric-error error">Please enter a valid information</div>
+                                        </div>
+                                        <div class="zrgcore-gender d-flex">
+                                            <h4 class="zrg-heading-4">Geschlecht</h4>
+                                            <label class="d-flex align-items-center">
+                                                <input type="radio" name="gender" value="male" checked="">
+                                                <span>Männlich</span>
+                                            </label>
+                                            <label class="d-flex align-items-center">
+                                                <input type="radio" name="gender" value="female">
+                                                <span>weiblich</span>
+                                            </label>
+                                        </div>
+                                        <div class="bmi-btn-wrapper">
+                                            <button type="submit" id="zrgcore-calc-btn"
+                                                class="zrg-text-2 zrgcore-bmi-btn zrg-button"><span>BMI berechnen</span></button>
+                                            <input type="reset" value="Eingabe löschen" class="zrg-text-2 zrgcore-bmi-btn reset-wrapper">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-flex align-items-end justify-content-center position-relative">
+                                <div class="fluid">
+                                    <div class="zrgcore-stats">
+                                        <div class="zrgcore-stats-progress">
+                                            <svg class="progress-ring progress-indicator healthy">
+                                                <circle r="0" class="progress-ring-circle" stroke-width="26" fill="transparent"></circle>
+                                            </svg>
+                                            <svg class="progress-ring">
+                                                <circle r="0" class="progress-ring-circle" stroke-width="26" fill="transparent"></circle>
+                                            </svg>
+                                            <div class="zrgcore-stats-content">
+                                                <h3 class="text-center zrg-display-3">BMI = <span><span class="zrgcore-bmi-result">21.6</span>
+                                                        <span class="zrgcore-bmi-result-unit">
+                                                            kg/m</span></span></h3>
+                                                <p class="zrg-heading-4 text-center zrgcore-bmi-status">Healthy</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    
+var zrgcore_calculator_obj = { "cm": "cm", "kg": "kg", "kgs": "kgs", "ft.": "ft.", "lbs": "lbs", "Underweight": "Underweight", "Healthy": "Healthy", "Overweight": "Overweight", "Obese": "Obese", "Extremely obese": "Extremely obese" };
+
+const roundingValue = 1;
+const heightUnitDiff = 0.3048;
+const weightUnitDiff = 2.2;
+let activeUnit = 'metric';
+let calcBtn = document.querySelector('#zrgcore-calc-btn');
+let resetBtn = document.querySelector('.reset-wrapper');
+
+// Input labels
+let heightLabel = document.querySelector('#zrgcore-metric-height-input');
+let weightLabel = document.querySelector('#zrgcore-metric-weight-input');
+let ageLabel = document.querySelector('#zrgcore-metric-age-input')
+// Bmi Indicator and labels
+let progressIndicator = document.querySelector('.progress-ring:first-child');
+let bmiLabel = document.querySelector('.zrgcore-bmi-result');
+let bmiStatusLabel = document.querySelector('.zrgcore-bmi-status');
+// Bmi bottom labels
+let bmiRangeLabel = document.querySelector('.zrgcore-bmi-range');
+let weightRangeLabel = document.querySelector('.zrgcore-weight-range');
+let metricErrorLabel = document.querySelector('.zrgcore-metric-error');
+let piLabel = document.querySelector('.PI');
+
+if (calcBtn) {
+	calcBtn.addEventListener('click', function (ev) {
+		ev.preventDefault();
+
+		// Metrics
+		let height = heightLabel.value;
+		let weight = weightLabel.value;
+		let age = ageLabel.value;
+
+		// BMI, Ponderal index values
+		let bmi, pi;
+
+		// Metric display
+		let weightDisplay, heightDisplay;
+		// Base conditions
+		if (activeUnit !== 'metric') {
+			heightDisplay = (height * heightUnitDiff).toFixed();
+			weightDisplay = (weight / weightUnitDiff).toFixed();
+			bmi = calculateBmi(heightDisplay, weightDisplay);
+			pi = calculatePI(heightDisplay, weightDisplay)
+		} else {
+			bmi = calculateBmi(height, weight);
+			pi = calculatePI(height, weight)
+		}
+		if (validateValues(ageLabel.value, heightLabel.value, weightLabel.value)) {
+			if (metricErrorLabel.classList.contains('active')) {
+				metricErrorLabel.classList.remove('active');
+			}
+			displayResults(bmi, pi, age, activeUnit);
+		} else {
+			metricErrorLabel.classList.add('active');
+		}
+
+		function validateValues(age, height, weight) {
+			if (+weight === 0 || +height === 0 || age > 100) return false;
+			const ageRegExp = /^(\d+)$/;
+			const WHRegExp = /^(\d+)$/;
+			return !!(ageRegExp.test(age) && WHRegExp.test(height) && WHRegExp.test(weight));
+		}
+
+		function calculateBmi(height, weight) {
+			let bmi = +weight / (Math.pow(+height / 100, 2));
+			bmi = bmi.toFixed(roundingValue);
+			return bmi;
+		}
+
+		function calculatePI(height, weight) {
+			let pi = +weight / (Math.pow(+height / 100, 3)).toFixed(roundingValue);
+			pi = pi.toFixed(roundingValue);
+			return pi;
+		}
+
+		function calculateWeightRange(height, activeUnit) {
+			let min, max;
+			if (activeUnit !== 'metric') {
+				height = (height * heightUnitDiff).toFixed(roundingValue);
+			}
+			min = (height * 0.351).toFixed(roundingValue);
+			max = (height * 0.475).toFixed(roundingValue);
+			return `${min} kgs - ${max} kgs`;
+		}
+
+		function displayResults(bmi, pi, age, activeUnit) {
+			bmiRangeLabel.innerHTML = '18.5 kg/m2 - 25 kg/m2';
+			bmiLabel.innerHTML = bmi;
+			piLabel.innerHTML = pi;
+			weightRangeLabel.innerHTML = calculateWeightRange(height, activeUnit);
+			if (activeUnit !== 'metric') {
+				weightRangeLabel.innerHTML = calculateWeightRange(height);
+				weightRangeLabel.innerHTML.replace(/(\d+.\d)\skgs\s-\s(\d+.\d)\skgs/g, function (values, min, max) {
+					let minDif = (min * weightUnitDiff).toFixed(roundingValue);
+					let maxDif = (max * weightUnitDiff).toFixed(roundingValue);
+					weightRangeLabel.innerHTML = `${minDif} lbs - ${maxDif} lbs`;
+				})
+			}
+
+			progressIndicator.classList = 'progress-ring';
+			if (age > 20) {
+				if (bmi < 18.5) {
+					bmiStatusLabel.innerHTML = zrgcore_calculator_obj['Underweight'];
+					progressIndicator.classList.add('underweight');
+				} else if (18.5 <= bmi && bmi <= 24.9) {
+					bmiStatusLabel.innerHTML = zrgcore_calculator_obj['Healthy'];
+					progressIndicator.classList.add('healthy');
+				} else if (25 <= bmi && bmi <= 29.9) {
+					bmiStatusLabel.innerHTML = zrgcore_calculator_obj['Overweight'];
+					progressIndicator.classList.add('overweight');
+				} else if (30 <= bmi && bmi <= 34.9) {
+					bmiStatusLabel.innerHTML = zrgcore_calculator_obj['Obese'];
+					progressIndicator.classList.add('obese');
+				} else {
+					bmiStatusLabel.innerHTML = zrgcore_calculator_obj['Extremely obese'];
+					progressIndicator.classList.add('ex-obese');
+				}
+			} else {
+				bmiRangeLabel.innerHTML = '16 kg/m2 - 22.6 kg/m2';
+				if (bmi < 16) {
+					bmiStatusLabel.innerHTML = zrgcore_calculator_obj['Underweight'];
+					progressIndicator.classList.add('underweight');
+				} else if (16 <= bmi && bmi <= 22.6) {
+					bmiStatusLabel.innerHTML = zrgcore_calculator_obj['Healthy'];
+					progressIndicator.classList.add('healthy');
+				} else if (22.7 <= bmi && bmi <= 27.7) {
+					bmiStatusLabel.innerHTML = zrgcore_calculator_obj['Overweight'];
+					progressIndicator.classList.add('overweight');
+				} else if (27.8 <= bmi && bmi <= 32.8) {
+					bmiStatusLabel.innerHTML = zrgcore_calculator_obj['Obese'];
+					progressIndicator.classList.add('obese');
+				} else {
+					bmiStatusLabel.innerHTML = zrgcore_calculator_obj['Extremely obese'];
+					progressIndicator.classList.add('ex-obese');
+				}
+			}
+		}
+
+	});
+}
+
+// Anim Indicator
+function indicatorInit(navWrapper, indicatorName, navItems) {
+	const nav = document.querySelector(navWrapper);
+	const indicator = document.querySelector(indicatorName);
+	const items = document.querySelectorAll(navItems);
+
+	function indicatorHandler(el) {
+		/* Remove active status from all navigation link */
+		items.forEach(item => {
+			item.classList.remove('active');
+			item.removeAttribute('style');
+		});
+		if (nav.classList.contains('zrgcore-units-list')) {
+			indicator.style.width = `${el.offsetWidth}px`;
+			indicator.style.left = `${el.offsetLeft}px`;
+			/* Changes color of indicator by attribute data-color */
+			indicator.style.backgroundColor = el.getAttribute('data-color');
+		}
+		el.classList.add('active');
+	}
+
+	function convertUnits(value, heightLabel, weightLabel) {
+		if (value !== activeUnit) {
+			if (value !== 'metric') {
+				heightLabel.value = (heightLabel.value / heightUnitDiff).toFixed();
+				weightLabel.value = (weightLabel.value * weightUnitDiff).toFixed();
+				weightRangeLabel.innerHTML.replace(/(\d+.\d)\skgs\s-\s(\d+.\d)\skgs/g, function (values, min, max) {
+					let minDif = (min * weightUnitDiff).toFixed(roundingValue);
+					let maxDif = (max * weightUnitDiff).toFixed(roundingValue);
+					weightRangeLabel.innerHTML = `${minDif} ${zrgcore_calculator_obj['lbs']} - ${maxDif} ${zrgcore_calculator_obj['lbs']}`;
+				})
+			} else {
+				heightLabel.value = (heightLabel.value * heightUnitDiff).toFixed();
+				weightLabel.value = (weightLabel.value / weightUnitDiff).toFixed();
+				weightRangeLabel.innerHTML.replace(/(\d+.\d)\slbs\s-\s(\d+.\d)\slbs/g, function (values, min, max) {
+					let minDif = (min / weightUnitDiff).toFixed(roundingValue);
+					let maxDif = (max / weightUnitDiff).toFixed(roundingValue);
+					weightRangeLabel.innerHTML = `${minDif} ${zrgcore_calculator_obj['kgs']} - ${maxDif} ${zrgcore_calculator_obj['kgs']}`;
+				})
+
+			}
+			if (+heightLabel.value === 0) heightLabel.value = "";
+			if (+weightLabel.value === 0) weightLabel.value = "";
+
+			displayUnit(value, heightLabel, weightLabel);
+		}
+	}
+
+	function displayUnit(type, heightLabel, weightLabel) {
+		const heightUnitLabel = document.querySelector('.zrgcore-metric-height');
+		const weightUnitLabel = document.querySelector('.zrgcore-metric-weight');
+		if (type === 'metric') {
+			heightUnitLabel.innerHTML = zrgcore_calculator_obj['cm'];
+			weightUnitLabel.innerHTML = zrgcore_calculator_obj['kg'];
+
+			heightLabel.placeholder = zrgcore_calculator_obj['cm'];
+			weightLabel.placeholder = zrgcore_calculator_obj['kg'];
+		} else {
+			heightUnitLabel.innerHTML = zrgcore_calculator_obj['ft.'];
+			weightUnitLabel.innerHTML = zrgcore_calculator_obj['lbs'];
+
+			heightLabel.placeholder = zrgcore_calculator_obj['ft.'];
+			weightLabel.placeholder = zrgcore_calculator_obj['lbs'];
+		}
+
+	}
+
+	items.forEach((item, index) => {
+		if (item) {
+			item.addEventListener('click', (e) => {
+				e.preventDefault();
+				indicatorHandler(e.target);
+				convertUnits(e.target.getAttribute('data-value'), heightLabel, weightLabel);
+				activeUnit = e.target.getAttribute('data-value');
+			});
+			item.classList.contains('active') && indicatorHandler(item);
+			calcBtn.click();
+		}
+	});
+	resetBtn.addEventListener('click', event=>{
+		event.preventDefault();
+		let el = document.querySelector('.zrgcore-units[data-value="metric"]')
+		el.click();
+		document.querySelector('form').reset();
+		calcBtn.click();
+	})
+}
+
+indicatorInit('.zrgcore-units-list', '.zrgcore-nav-indicator', '.zrgcore-units')
+</script>
